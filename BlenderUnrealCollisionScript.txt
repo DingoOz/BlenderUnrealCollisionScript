@@ -1,4 +1,4 @@
-#24 December 2017
+#25 December 2017
 #Dingo_aus 
 #Script adds geometry that Unreal Engine interprets to be the collision volumes.
 #script requires objects to be selected for collision to be added
