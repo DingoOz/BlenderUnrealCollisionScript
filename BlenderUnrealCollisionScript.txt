@@ -1,4 +1,4 @@
-#25 December 2017
+#26 December 2017
 #Dingo_aus 
 #Script adds geometry that Unreal Engine interprets to be the collision volumes.
 #script requires objects to be selected for collision to be added
@@ -67,7 +67,8 @@ for obj in bpy.context.selected_objects:
         obj.name = obj.name + "_" + postfix_str.rjust(2, '0')
         #add to separate layer so export can exclude UCX objects and painted in Substance Painter etc
         #move to layer 2
-        obj.move_to_layer(layers=(False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False))
+        obj.layers=(False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False)
+        print("Collision volumes assigned to layer 2")
     print(obj.name)
 print("Success!")
 
