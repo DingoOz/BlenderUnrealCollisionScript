@@ -7,7 +7,7 @@
 #0.5) Smart Project Unwrap each item (calculate UVs)
 #1) Duplicates all selected objects then
 #2) runs through a loop and finds the duplicated items with ".001, .002, .003 etc" and renames these 
-#   objects to be collision objects
+#   objects to be collision objects. Will also put the collision volumes on Layer 2.
 
 
 
