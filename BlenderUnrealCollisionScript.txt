@@ -1,3 +1,7 @@
+#1 December 2018
+Adding functionality to toggle auto-unwrap on or off
+
+
 #26 December 2017
 #Dingo_aus 
 #Script adds geometry that Unreal Engine interprets to be the collision volumes.
@@ -39,7 +43,7 @@ for obj in bpy.data.objects:
     unwrapcount = unwrapcount + 1
 print("---Total objects unwrapped:" + str(unwrapcount))
 
-print("---All objects have unwrapped")
+print("---All objects have been unwrapped")
 
 #1)
 #Duplicate selected objects...then rename to be the collision
@@ -57,7 +61,7 @@ for obj in bpy.context.selected_objects:
     temp_str2 = "."
     #print(temp_str)
     if temp_str[:1] == temp_str2:
-        print("CANDIDATE tTO CONVERT TO PHYSICS VOLUME HAS BEEN FOUND: " + oldname)
+        print("CANDIDATE TO CONVERT TO PHYSICS VOLUME HAS BEEN FOUND: " + oldname)
         #add prefix
         obj.name = "UCX_" + obj.name 
         #remove last four characters
