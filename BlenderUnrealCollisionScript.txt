@@ -1,10 +1,9 @@
 #1 December 2018
-Adding functionality to toggle auto-unwrap on or off
-
+#Added functionality to toggle auto-unwrap on or off
 
 #26 December 2017
 #Dingo_aus 
-#Script adds geometry that Unreal Engine interprets to be the collision volumes.
+#Script adds geometry that Unreal Engine interprets to be the collision volumes. Collision data will be added to layer 2 in Blender
 #script requires objects to be selected for collision to be added
 
 #0) remove the full stop from previsouly duplicated names
@@ -13,7 +12,9 @@ Adding functionality to toggle auto-unwrap on or off
 #2) runs through a loop and finds the duplicated items with ".001, .002, .003 etc" and renames these 
 #   objects to be collision objects. Will also put the collision volumes on Layer 2.
 
-
+#GLOBAL VARIABLES
+#set the variable below to 1 if you want the script to automatically unwrap the UVs of each selected visible mesh.
+SHOULD_AUTO_UNWRAP = 0
 
 import bpy
 print("Start---------------- ")
@@ -23,27 +24,29 @@ for obj in bpy.context.selected_objects:
     obj.name = obj.name.replace(".","_")
 print("---Any fullstops in names successfully replaced with underscores... continuing")
 
-#0.5) - Smart unwrap each object's UVs.
+#0.5) - Smart unwrap each object's UVs if GLOBAL variation set to unwrap
 
-bpy.ops.object.mode_set(mode = 'OBJECT')
-unwrapcount = 0
-for obj in bpy.data.objects:
-    #bpy.ops.object.select_all(action= 'DESELECT')
-    #if obj.layers[0] == True:
-    #    bpy.context.scene.objects.active = obj
-    #    obj.select = True
-    #else:
-    #    continue
-#Just to be sure that is everything deselected
-    bpy.ops.object.mode_set(mode = 'EDIT')
-    bpy.ops.mesh.select_all(action = 'DESELECT')
+if SHOULD_AUTO_UNWRAP == 1:
     bpy.ops.object.mode_set(mode = 'OBJECT')
-    print("---unwrapping: " + obj.name)
-    bpy.ops.uv.smart_project()
-    unwrapcount = unwrapcount + 1
-print("---Total objects unwrapped:" + str(unwrapcount))
-
-print("---All objects have been unwrapped")
+    unwrapcount = 0
+    for obj in bpy.data.objects:
+        #bpy.ops.object.select_all(action= 'DESELECT')
+        #if obj.layers[0] == True:
+        #    bpy.context.scene.objects.active = obj
+        #    obj.select = True
+        #else:
+        #    continue
+    #Just to be sure that is everything deselected
+        bpy.ops.object.mode_set(mode = 'EDIT')
+        bpy.ops.mesh.select_all(action = 'DESELECT')
+        bpy.ops.object.mode_set(mode = 'OBJECT')
+        print("---unwrapping: " + obj.name)
+        bpy.ops.uv.smart_project()
+        unwrapcount = unwrapcount + 1
+    print("---Total objects unwrapped:" + str(unwrapcount))
+    print("---All objects have been unwrapped")
+elif SHOULD_AUTO_UNWRAP == 0:
+    print("---No Objects Unwrapped, original set UV Coords used---")
 
 #1)
 #Duplicate selected objects...then rename to be the collision
